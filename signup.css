@@ -4,7 +4,7 @@ background: #eef2f7;
 display: flex;
 justify-content: center;
 align-items: center;
-height: 100vh;
+height: auto;
 margin: 0;
 }
 
@@ -36,7 +36,9 @@ input[type="email"],
 input[type="password"],
 input[type="date"],
 input[type="number"],
-input[type="tel"]{
+input[type="tel"],
+select,
+input[type="file"]{
 width: 100%;
 padding: 10px;
 border: 1.5px solid #ccc;
@@ -51,28 +53,43 @@ input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="date"]:focus,
 input[type="number"]:focus,
-input[type="tel"]:focus{
+input[type="tel"]:focus,
+input[type="file"],
+select:focus{
     border-color: #0056b3;
     outline: none;
 }
-button{
-    width: 100%;
+button, .avatar-btn{
+    width: auto;
     background-color: #0056b3;
     color: white;
     border: none;
-    padding: 12px;
+    padding: 8px 16px;
     border-radius: 5px;
     font-size: 1.1rem;
+    margin-right: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
-button:hover{
+button:hover, .avatar-btn:hover {
     background-color: #003d7a;
 }
+/*
 .form-footer a{
     color: #0056b3;
 text-decoration: none;
 }
 .form-footer a:hover{
     text-decoration: underline;
+}
+    */
+
+#avatar_preview {
+    display: none;
+    margin-top: 10px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #007bff;
 }

@@ -6,6 +6,11 @@
     <title>VIEWS</title>
     <link rel="stylesheet" href="inside.css">
     <link rel="stylesheet" href="styles.css">
+    <a href="index.html"></a>
+    <a href="login.html"></a>
+    <a href="signup.html"></a>
+    <a href="inside.html"></a>
+
 </head>
 <body>
 
@@ -31,7 +36,7 @@
 </div>
 
 
-<div>
+
     <section class="Country">
 
    <div class="county"> 
@@ -65,7 +70,7 @@
 
              <div >
             <a href="#" class="house-thumbnail">
-            <img class="img-set2" src="/houses/18.jpeg ">
+            <img class="img-set2" src="/houses/18.jpeg " alt="home">
             </a>
             <div class="card-content">
             <p class="price-line">
@@ -144,7 +149,7 @@
 
 <section class="footer">
 <div class="footer-content">
-<img   src="/brands/image.webp" class="eyobra-logo" alt="">
+<img   src="/brands/image.webp" class="eyobra-logo" alt="logo">
 <p>
 Your Home Your Comfort!
 </p>
@@ -198,5 +203,79 @@ Your Home Your Comfort!
 </div>
 </section>
 
+<script>
+    const countryArrow = document.querySelector('.county:nth-child(1) .arrow-down');
+    const stateArrow = document.querySelector('.county:nth-child(2) .arrow-down');
+    const lgaArrow = document.querySelector('.county:nth-child(3) .arrow-down');
+    const cityArrow = document.querySelector('.county:nth-child(4) .arrow-down');
+
+    const countryDiv = document.querySelector('.county:nth-child(1)');
+    const stateDiv = document.querySelector('.county:nth-child(2)');
+    const lgaDiv = document.querySelector('.county:nth-child(3)');
+    const cityDiv = document.querySelector('.county:nth-child(4)');
+
+  let selectedCountry = '';
+  let selectedState = '';
+
+  //Fetch and display countries
+  countryArrow.addEventListener('click', async () => {
+    const res = await fetch('https://countriesnow.space/api/v0.1countries/positions');
+    const data = await res.json();
+    const countries = data.data;
+    countryDiv.innerHTML +=  `<ul class="dropdown">${countries.map(c => `<li class="country-item">${c.name}</li>`).join('')}</ul>`;
+
+    //Add click event to each country 
+    document.querySelectorAll('.country-item').forEach(item => {
+        item.onclick = function () {
+            selectedCountry = this.textContent;
+            stateDiv.querySelector('h4').textContent = 'State';
+            stateDiv.querySelector('.dropdown')?.remove();
+        };
+    });
+  });
+
+  // Fetch and display states for selected country
+  stateArrow.addEventListener('click', async () => {
+    if (!selectedCountry) {
+        alert('Please select a country first.');
+        return;
+    }
+    const res = await fetch('htttps://countriesnow.space/api/v0.1/countries/states', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ country: selectedCountry })
+    });
+    const data = await res.json();
+    const states = data.data.states;
+    stateDiv.innerHTML += `<ul class="dropdown">${states.map(s => `<li class="state-item">${s.name}</li>`).join('')}</ul>`;
+   
+    // Add click event to each state
+   document.querySelectorAll('.state-item').forEach(item => {
+   item.onclick = function() {
+    selectedState = this.textContent;
+    cityDiv.querySelector('h4').textContent = 'City';
+    cityDiv.querySelector('.dropdown')?.remove();
+   };    
+   });
+});
+
+// Fetch and display cities for selected country and state
+cityArrow.addEventListener('click', async () => {
+    if (!selectedCountry || !selectedState) {
+        alert('Please select a country and state first.');
+        return;
+    }
+    const res = await fetch('https://countriesnow.space/api/v0.1/countries/state/cities', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ country: selectedCountry, state: selectedState })
+    });
+    const data = await res.json();
+    const cities = data.data;
+    cityDiv.innerHTML += `<ul class="dropdown">${cities.map(city => `<li class="city-item">${city}</li>`).join('')}</ul>`;
+});
+
+//LGA is not available in this API. For Nigeria, you would need a seperate API or static data. 
+</script>
 </body>
 </html>

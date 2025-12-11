@@ -84,7 +84,7 @@ margin-right: 0px;
  }
  
  .login-btn {
-     background-color: #007bff;
+     background-color: rgb(105, 105, 105);
      color: #fff;
      font-size: 14px;
      margin-left: 80px;
@@ -95,7 +95,7 @@ margin-right: 0px;
  }
  
  .sign-up-btn {
-     background-color: #28a745;
+     background-color: rgb(105, 105, 105);
      color: #fff;
      font-size: 14px;
      margin-left: 0px;

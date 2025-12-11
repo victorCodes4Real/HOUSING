@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="signup.css">
+    <a href="index.html"></a>
+    <a href="login.html"></a>
+    <a href="signup.html"></a>
     <title>SIGN UP</title>
 </head>
 <body>
+     <!-- Error display error -->
+     <div id="error-message" style="color: red; margin-bottom: 15px;"></div>
 
    
 
@@ -20,7 +25,7 @@
 
      <div class="form-group">
     <label for="last_name">Last Name</label>
-    <input type="text" id="last_name" name="last_name" required placeholder="Your Last Name">
+    <input type="text" id="last_name" name="last_name" required placeholder="Your Last Name" >
    </div>
 
     <div class="form-group">
@@ -36,43 +41,167 @@
      
       <div class="form-group">
     <label for="dob">Date of Birth</label>
-    <input type="date" id="dob" name="dob" required >
+    <input type="date" id="dob" name="dob" required />
    </div>
 
          <div class="form-group">
     <label for="age">Age</label>
-    <input type="number" id="age" name="age" min="0" max="120" required placeholder="Your age">
+    <input type="number" id="age" name="age" min="0" max="120" required placeholder="Your age"/>
    </div>
 
      <div class="form-group">
     <label for="phone">Telephone</label>
-    <input type="tel" id="phone" name="phone" required placeholder="+234 555 123 675">
+    <input type="tel" id="phone" name="phone" required placeholder="+234 555 123 675"/>
    </div>
+
+    <div class="form-group">
+        <label for="">Avatar</label>
+        <button type="button" class="avatar-btn" id="galleryBtn">Upload from Gallery</button>
+         <button type="button" class="avatar-btn" id="cameraBtn">Take Photo</button>
+           <!--Hidden file inputs-->
+           <input type="file" id="galleryInput" name="profile_image" accept="image/*" style="display: none;"/>
+           <input type="file" id="cameraInput" capture="user" accept="image/*" style="display: none;"/>
+           <img id="avatar_preview" src="#" alt="Avatar Preview"/>
+    </div>
 
 
      <div class="form-group">
     <label for="email">E-mail Address</label>
-    <input type="email" id="email" name="email" required placeholder="your@email.com">
+    <input type="email" id="email" name="email" required placeholder="your@email.com"/>
    </div>
 
      <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" id="password" name="password" required placeholder="Enter password">
+    <input type="password" id="password" name="password" required placeholder="Enter password"/>
    </div>
 
      <div class="form-group">
     <label for="confirm_password">Confirm Password</label>
-    <input type="confirm_password" id="confirm_password" name="confirm_password" required placeholder="Confirm password">
+    <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm password"/>
    </div>
 
    <button type="submit">Sign Up</button>
 
    <div class="form-footer">
 Already have an account?
-<a href="#">Login here</a>
+<a href="login.html">Login here</a>
    </div>
 
     </form>
+<script>
+   const galleryBtn = 
+   document.getElementById('galleryBtn');
+   const cameraBtn = 
+   document.getElementById('cameraBtn');
+   const galleryInput =
+   document.getElementById('galleryInput');
+   const cameraInput =
+   document.getElementById('cameraInput');
+   const avatarPreview = 
+   document.getElementById('avatar_preview');
+
+   //user clicks "Upload from Gallery"
+    galleryBtn.addEventListener('click', ()=>galleryInput.click());
+    //user clicks "Take Photo"
+    cameraBtn.addEventListener('click', ()=>cameraInput.click());
+
+    //If image is chosen from gallery
+     galleryInput.addEventListener('change', handleImage);
+     //If image is taken with camera
+     cameraInput.addEventListener('change', handleImage);
+
+     //Disable the other file input when one is selected, and pick the right file for submission (Only one file input should be enabled at submit time)
+  document.querySelector('.signup-form').addEventListener('submit', function(e) {
+    //Make sure at most one input enables submission (If both have files, prefer camera, else use gallery)
+    if (cameraInput.files.length){
+        galleryInput.disabled = true;
+        galleryInput.removeAttribute('name');
+        cameraInput.name = 'profile_image';
+    } else if (galleryInput.files.length) {
+        cameraInput.disabled = true;
+        cameraInput.removeAttribute('name');
+        galleryInput.name = 'profile_image';
+    }
+  });
+
+  function handleImage(e) {
+const file =e.target.files[0];
+if (file &&
+    file.type.startsWith('image/')){
+        const reader = new FileReader();
+        reader.onload = function(evt){
+        avatarPreview.src = evt.target.result;
+        avatarPreview.style.display = 'inline-block';
+        };
+        reader.readAsDataURL(file);
+    } else {
+         avatarPreview.src = '#';
+         avatarPreview.style.display = 'none';
+    }
+  }
+   
+
+   document.getElementById('signup-form').addEventListener('submit', 
+    async function (e) {
+        e.preventDefault();
+  document.getElementById('error-message').textContent = "";
+       const form = e.target;
+       const formData = new FormData(form);
+
+       const response = await fetch ('/register',{method: 'POST',body: formData});
+        if (response.ok){
+            //Registration succeeded: redirect or show success
+            window.location.href = '/';
+        } else {
+            // Registration failed: display error
+            const errorText = await response.text();
+            document.getElementById('error-message').textContent = errorText; 
+        }
+    });
+    // Debounced email availability check
+     const  emailInput = 
+     document.getElementById('email');
+     const emailFeedback = 
+     document.getElementById('email-feedback');
+     let emailTimeout = null;
+
+     emailInput.addEventListener('input', () => 
+     {
+        emailFeedback.textContent = '';
+        clearTimeout(emailTimeout);
+
+
+        const email = emailInput.value.trim();
+        if (!email){
+        emailFeedback.textContent = '';
+        emailInput.setCustomValidity('');
+        return;
+     } 
+     emailTimeout = setTimeout(()=> {
+      fetch ('/check-email', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify ({ email })
+      }) 
+      .then (res => res.json())
+      .then (data => {
+        if (!data.available) {
+        emailFeedback.textContent = 'Email is already  registered';
+
+        emailInput.setCustomValidity('Email is already registered');
+        } else {
+            emailFeedback.textContent = '';
+            emailInput.setCustomValidity('');
+        }
+      })
+      .catch (() => {
+        emailFeedback.textContent = 'Error checking email';
+        emailInput.setCustomValidity('Error checking email');
+      });
+     }, 500);
+    });
+</script>
 
 </body>
+
 </html>

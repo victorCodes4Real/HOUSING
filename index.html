@@ -10,6 +10,11 @@
     <link rel="preload" href="/background/city3.jpeg" as="image" type="image/jpg">
     <link rel="preload" href="/background/city4.jpeg" as="image" type="image/jpg">
     <link rel="preload" href="/background/city5.jpeg" as="image" type="image/jpg">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+      <a href="signup.html"></a>
+      <a href="login.html"></a>
+      <a href="inside.html"></a>
+      <a href="contactUs.html"></a>
 </head>
 <body>
     
@@ -21,15 +26,20 @@
                     <ul class="nav-links">
                         <img   src="/brands/image.webp" class="eyobra-logo" alt="">
                         <p class="logo">Eyrie & Obra</p>
+                       
                         <li><a href="#timeline">Timeline</a></li>
                         <li><a href="#discover">Discover</a></li>
                         <li><a href="#property-request">Property Request</a></li>
                         <li><a href="#hospitality-tourism">Hospitality & Tourism</a></li>
                         <li><a href="#products">Products</a></li>
-                        <li><a href="login.html">Contact Us</a></li>
+                        <li><a href="contactUs.html">Contact Us</a></li>
                         <li><a href="login.html" class="login-btn">Login</a></li>
                         <li><a href="signup.html" class="sign-up-btn">Sign Up for Free</a></li>
-                    </ul>
+                        <li> <div id="user-avatar" style="display: flex; align-items: center; font-weight: bold;
+                        font-size: 1.2rem; background: #007bff; color: white; width: 50px; height: 50px;
+                        border-radius: 50%; justify-content: center; user-select: none; margin-left: 80px;"></div></li>
+    
+                </ul>
                 </div>
                 </nav>
             </header>
@@ -63,11 +73,11 @@
                       
         <div class="marquee">
         <marquee behavior="" direction="">
-                <img src="/brands/logo1.png" alt=""  style="margin-right:500px;">
-                <img src="/brands/logo2.png" alt="" style="margin-right: 500px;">  
-                <img src="/brands/logo3.png" alt="" style="margin-right:500px;">
-                <img src="/brands/logo4.png" alt="" style="margin-right:  500px;">
-                    <img src="/brands/logo5.png" alt="" style="margin-right:  500px;"> 
+                <img src="/brands/logo1.png" alt="brand"  style="margin-right:500px;">
+                <img src="/brands/logo2.png" alt="brand" style="margin-right: 500px;">  
+                <img src="/brands/logo3.png" alt="brand" style="margin-right:500px;">
+                <img src="/brands/logo4.png" alt="brand" style="margin-right:  500px;">
+                    <img src="/brands/logo5.png" alt="brand" style="margin-right:  500px;"> 
                 </marquee>
         </div>
     </div> 
@@ -78,7 +88,7 @@
     <article class="card-container">
     <div >
         <a href="inside.html" class="house-thumbnail1" >
-        <img class="img-set1" src="/houses/gida3.jpeg ">
+        <img   alt="house" class="img-set1" src="/houses/gida3.jpeg ">
         </a>
         <div class="card-content">
         <p>Ongoing/Off-plan project</p>
@@ -125,7 +135,7 @@
 
              <div >
             <a href="inside.html" class="house-thumbnail">
-            <img class="img-set2" src="/houses/18.jpeg ">
+            <img class="img-set2" src="/houses/18.jpeg " alt="house">
             </a>
             <div class="card-content">
             <p class="price-line">
@@ -329,8 +339,14 @@
     
 <section class="footer">
 <div class="footer-content">
-<img   src="/brands/image.webp" class="eyobra-logo" alt="">
+<div style="display: flex; align-items: center; ;">
+    <img   src="/brands/image.webp" class="eyobra-logo" alt="">
+<div>
+      <button id="logout-btn" style="border-radius: 15%; margin-left:  50px; background-color: antiquewhite; ">Log Out</button> 
+</div>
+</div>
 <p>
+    
 Your Home Your Comfort!
 </p>
 <div class="icons">
@@ -338,8 +354,9 @@ Your Home Your Comfort!
 <img class="socials" src="/iconz/twitter.png" alt="twitter">
 <img class="socials" src="/iconz/whatsapp.png" alt="whatsapp">
 <img class="socials" src="/iconz/youtube.png" alt="youtube">
-<img class="socials" src="/iconz/youtube.png" alt="youtube">
+<i class="fab fa-instagram"></i>
 </div>
+
 </div>
 
 <div class="footer-content">
@@ -384,4 +401,5 @@ Your Home Your Comfort!
 </section>
 </body>
 <script src="style.js"></script>
+<script src="server.js"></script>
 </html>
