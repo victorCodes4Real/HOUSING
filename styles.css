@@ -110,6 +110,20 @@ margin-right: 0px;
      padding: 2rem;
  }
 
+ #user-avatar {
+    display: flex;
+     align-items: center;
+      font-weight: bold;
+    font-size: 1.2rem;
+     background: #007bff; 
+    color: white;
+     width: 50px;
+     height: 50px;
+  border-radius: 50%;
+   justify-content: center;
+    margin-left: 80px;
+ }
+
 .hero-section {
 position: relative;
 background-image: url('/background/city1.jpg') ;
@@ -137,10 +151,19 @@ display: flex;
     position:relative;
     text-align: center;
     color: #fff;
-    
     font-size: 30px;
     margin-top: 220px;
 
+}
+#rent-button {
+margin-left: 170px;
+padding-left: 50px;  
+padding-right: 50px;
+padding-top: 10px; 
+padding-bottom: 10px; 
+background: transparent; 
+border-radius: 50px; 
+border-color: aliceblue;
 }
 
 .gate-1{
@@ -226,9 +249,9 @@ animation-timing-function: ease-in-out ;
      left: 0;
      bottom: 0; 
      width: 100%;
-     background: rgba(0, 0, 0, 0.5);;
+     background: rgba(0, 0, 0, 0.5);
      overflow: hidden;
-     height: 50px;
+     height: 30px;
      z-index: 1;
     
      background-repeat:no-repeat ;
@@ -261,6 +284,27 @@ transition-duration: infinite;
 transition-delay: 0;
 }
 
+.marquee-wrapper{ 
+     width:100%; 
+     background:transparent;
+      padding:10px 0;
+     height: 10px;
+    border-top: #333;
+     border-bottom: #333;
+     border-color: #333;
+     border-width: 50px;
+    }
+.marquee-track{ 
+    display:flex; 
+    gap:40px; 
+    background: transparent;
+    align-items:center; 
+    animation:scroll-left 20s linear infinite;
+     height: 10px;
+    }
+.marquee-group{ display:flex; gap:40px; align-items:center; }
+.marquee-group img{ height:25px; display:block; }
+.marquee-wrapper:hover .marquee-track{ animation-play-state:paused; }
 
 @keyframes hero-section{
     0%{
@@ -288,6 +332,13 @@ animation-timing-function: linear;
 }
 
 }
+
+@keyframes scroll-left{
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-27%); } /* duplicates allow -50% loop */
+}
+
+
 /*
 .scrolling-images {
     background-color: transparent;
@@ -343,7 +394,13 @@ white-space: nowrap;
     border-radius: 10px;
 }
 
-
+#horiz-line,#horiz-line2,#horiz-line3,#horiz-line4,#horiz-line5,#horiz-line6,#horiz-line7,#horiz-line8,#horiz-line9{
+margin-left: 40px; 
+margin-right: 40px; 
+margin-top: 40px; 
+color: silver;
+}
+ 
 .card-section2{
     display: grid;
     margin-top: 10px;
@@ -615,6 +672,15 @@ margin-top: 2px;
 margin-bottom: 20px;
 }
 
+#Eyrie-footer-logo{
+display: flex; 
+align-items: center;
+}
+#logout-btn{
+    border-radius: 15%; 
+    margin-left:  50px; 
+    background-color: lightgreen;
+}
 .icons img {
 display: inline-block;
 font-size: 22px;

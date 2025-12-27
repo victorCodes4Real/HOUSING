@@ -11,10 +11,10 @@
     <link rel="preload" href="/background/city4.jpeg" as="image" type="image/jpg">
     <link rel="preload" href="/background/city5.jpeg" as="image" type="image/jpg">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
-      <a href="signup.html"></a>
-      <a href="login.html"></a>
-      <a href="inside.html"></a>
-      <a href="contactUs.html"></a>
+      <a href="signup.html" title="sign-up-btn"></a>
+      <a href="login.html" title="login-btn"></a>
+      <a href="inside.html" title="inside-views"></a>
+      <a href="contactUs.html" title="contactUs-btn"></a>
 </head>
 <body>
     
@@ -24,9 +24,10 @@
                 <nav class="navbar">
                     <div>
                     <ul class="nav-links">
+                        <li>
                         <img   src="/brands/image.webp" class="eyobra-logo" alt="">
                         <p class="logo">Eyrie & Obra</p>
-                       
+                        </li>
                         <li><a href="#timeline">Timeline</a></li>
                         <li><a href="#discover">Discover</a></li>
                         <li><a href="#property-request">Property Request</a></li>
@@ -35,9 +36,7 @@
                         <li><a href="contactUs.html">Contact Us</a></li>
                         <li><a href="login.html" class="login-btn">Login</a></li>
                         <li><a href="signup.html" class="sign-up-btn">Sign Up for Free</a></li>
-                        <li> <div id="user-avatar" style="display: flex; align-items: center; font-weight: bold;
-                        font-size: 1.2rem; background: #007bff; color: white; width: 50px; height: 50px;
-                        border-radius: 50%; justify-content: center; user-select: none; margin-left: 80px;"></div></li>
+                        <li> <div id="user-avatar"></div></li>
     
                 </ul>
                 </div>
@@ -45,17 +44,15 @@
             </header>
         
             <div class="ultimate-gateway">
-                <h1 class="gate-1" style="">The Ultimate Gateway</h1>
-                <p class="gate-2" style="">Explore your entry way to an afffordable dream destination for your <br>
+                <h1 class="gate-1" >The Ultimate Gateway</h1>
+                <p class="gate-2" >Explore your entry way to an afffordable dream destination for your <br>
                     residential, commercial, hospitality and enjoyable travel needs
                 </p>
                 <p class="gateway-line">
                     <img class="gateway-icon1" src="/iconz/building.png" alt="building">    
                     <span class="gateway-span1">Buy</span>
 
-                    <button type="button" style="margin-left: 170px; padding-left: 50px;  padding-right: 50px;
-                       padding-top: 10px; padding-bottom: 10px; background: transparent; border-radius: 50px; 
-                       border-color: aliceblue;">
+                    <button type="button" id="rent-button">
                 <img class="gateway-icon2" src="/iconz/house.png" alt="house">
                 <span class="gateway-span2">Rent</span>
                 </button>
@@ -67,20 +64,30 @@
                 <input type="search" placeholder="search..."/>
             </div>
             </div>
-            
+            </div>
 
         
                       
-        <div class="marquee">
-        <marquee behavior="" direction="">
-                <img src="/brands/logo1.png" alt="brand"  style="margin-right:500px;">
-                <img src="/brands/logo2.png" alt="brand" style="margin-right: 500px;">  
-                <img src="/brands/logo3.png" alt="brand" style="margin-right:500px;">
-                <img src="/brands/logo4.png" alt="brand" style="margin-right:  500px;">
-                    <img src="/brands/logo5.png" alt="brand" style="margin-right:  500px;"> 
-                </marquee>
-        </div>
-    </div> 
+       <div class="marquee-wrapper">
+  <div class="marquee-track">
+    <div class="marquee-group">
+      <img src="/brands/logo1.png" alt="brand">
+      <img src="/brands/logo2.png" alt="brand">
+      <img src="/brands/logo3.png" alt="brand">
+      <img src="/brands/logo4.png" alt="brand">
+      <img src="/brands/logo5.png" alt="brand">
+    </div>
+    <!-- duplicate group for seamless loop -->
+    <div class="marquee-group" aria-hidden="true">
+      <img src="/brands/logo1.png" alt="brand2">
+      <img src="/brands/logo2.png" alt="brand2">
+      <img src="/brands/logo3.png" alt="brand2">
+      <img src="/brands/logo4.png" alt="brand2">
+      <img src="/brands/logo5.png" alt="brand2">
+    </div>
+  </div>
+  </div>
+</div>
 <p class="property-type">Browse by property type</p>
 
 <div class="cards">
@@ -151,7 +158,7 @@
                 <img class="iconz-bath" src="/iconz/bath.png" alt="bath">
                 <span class="bath2">Bath</span>
                 </p>
-               <hr style="margin-left: 40px; margin-right: 40px; margin-top: 40px; color: silver;">
+               <hr id="horiz-line">
             <a href="" class="btn" >See More</a>
         </div>
         </div>
@@ -178,7 +185,7 @@
                 <img class="iconz-bath" src="/iconz/bath.png" alt="bath">
                 <span class="bath2">Bath</span>
                 </p>
-               <hr style="margin-left: 40px; margin-right: 40px; margin-top: 40px; color: silver;">
+               <hr id="horiz-line2">
             <a href="" class="btn" >See More</a>
         </div>
         </div>
@@ -203,7 +210,7 @@
                 <img class="iconz-bath" src="/iconz/bath.png" alt="bath">
                 <span class="bath2">Bath</span>
                 </p>
-               <hr style="margin-left: 40px; margin-right: 40px; margin-top: 40px; color: silver;">
+               <hr id="horiz-line3" >
             <a href="" class="btn">See More</a>
         </div>
         </div>
@@ -230,7 +237,7 @@
                 <img class="iconz-bath" src="/iconz/bath.png"  alt="bath">
                 <span class="bath2">Bath</span>
                 </p>
-               <hr style="margin-left: 40px; margin-right: 40px; margin-top: 40px; color: silver;">
+               <hr id="horiz-line4">
             <a href="" class="btn" >See More</a>
         </div>
         </div>
@@ -255,7 +262,7 @@
                 <img class="iconz-bath" src="/iconz/bath.png" alt="bath">
                 <span class="bath2">Bath</span>
                 </p>
-               <hr style="margin-left: 40px; margin-right: 40px; margin-top: 40px; color: silver;">
+               <hr id="horiz-line5" >
             <a href="" class="btn">See More</a>
         </div>
         </div>
@@ -283,7 +290,7 @@
                 <img class="iconz-bath" src="/iconz/bath.png" alt="bath">
                 <span class="bath2">Bath</span>
                 </p>
-               <hr style="margin-left: 40px; margin-right: 40px; margin-top: 40px; color: silver;">
+               <hr id="horiz-line6" >
             <a href="" class="btn" >See More</a>
         </div>
         </div>
@@ -339,10 +346,10 @@
     
 <section class="footer">
 <div class="footer-content">
-<div style="display: flex; align-items: center; ;">
+<div id="Eyrie-footer-logo">
     <img   src="/brands/image.webp" class="eyobra-logo" alt="">
 <div>
-      <button id="logout-btn" style="border-radius: 15%; margin-left:  50px; background-color: antiquewhite; ">Log Out</button> 
+      <button id="logout-btn">Log Out</button> 
 </div>
 </div>
 <p>
@@ -401,5 +408,4 @@ Your Home Your Comfort!
 </section>
 </body>
 <script src="style.js"></script>
-<script src="server.js"></script>
 </html>

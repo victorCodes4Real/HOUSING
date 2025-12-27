@@ -1,16 +1,25 @@
+
 {
-  "name": "housing",
-  "version": "1.0.0",
-  "type": "module",
-  "dependencies": {
-    "bcrypt": "^6.0.0",
-    "body-parser": "^2.2.0",
-    "express": "^5.1.0",
-    "express-session": "^1.18.2",
-    "mongoose": "^8.18.0",
-    "multer": "^2.0.2"
-  },
-  "devDependencies": {
-    "@types/express": "^5.0.3"
-  }
+"name": "housing",
+"version": "1.0.0",
+"type":"module",
+"scripts":{ 
+"start": "nodemon server.js",
+"dev": "nodemon server.js"
+
+},
+"dependencies":{
+"bcrypt": "^6.0.0",
+"body-parser": "^2.2.0",
+"express": "^5.1.0",
+"express-session": "^1.18.2",
+"mongoose": "^8.18.0",
+"multer": "^2.0.2"
+
+},
+"devDependencies": {
+  "@types/express": "^5.0.3",
+  "nodemon": "3.1.11"
+}
+
 }

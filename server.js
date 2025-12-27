@@ -26,10 +26,8 @@ app.use (session({
 
 
 //Connect to MongoDB database "my app"
-mongoose.connect('mongodb://localhost:27017/housing',{
-     useNewUrlParser: true,
-     useUnifiedTopology: true
-}).then(() => console.log('Connected to MongoDB'))
+mongoose.connect(MONGO_URI)
+.then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('MongoDB connection error:', err));
 
 //Ensure upload folder exists
@@ -157,69 +155,68 @@ app.get('/signup.html', (req, res) => res.sendFile(path.join(__dirname, 'signup.
       });
 
           // Homepage route to greet and show avatar
-          app.get ('/',async (req, res) => {
-            let user = null;
-          if (req.session.userId){
-            user = await User.findById(req.session.userId);
-          }             
-            let html = `
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-            <title>Homepage</title>
-            <style>
-            #user-avatar{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.5 rem;
-            background: #007BFF;
-            color: white;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            user-select: none;
-            margin: 20px;
-            }
-            img{
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            }
+          app.get ('/', async (req, res) => {
+            try {
+              let user = null;
+              if (req.session.userId){
+                user = await User.findById(req.session.userId);
+              }             
+              let html = `
+              <!DOCTYPE html>
+              <html lang="en">
+              <head>
+              <title>Homepage</title>
+              <style>
+              #user-avatar{
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-weight: bold;
+              font-size: 1.5rem;
+              background: #007BFF;
+              color: white;
+              width: 70px;
+              height: 70px;
+              border-radius: 50%;
+              user-select: none;
+              margin: 20px;
+              }
+              img{
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+              object-fit: cover;
+              }
 
-            </style>
-            </head>
-            <body>
-            <h1> Welcome to the Homepage</h1>
-            `;
-          if (user){
-             html += `
-             <h2> Hello, ${user.firstName} ${user.lastName}</h2>
-              <div id="user-avatar">
-             `;
-             if (user.imageUrl){
-                html += `<img src ="${user.imageUrl}" 
-                alt="${user.firstName} ${user.lastName}">`; 
-             } else {
-                const initials = `${user.firstName.charAt(0).toUpperCase()}${user.lastName.charAt(0).toUpperCase()}`;
-                   html += `${initials}`;
-             }
-             html += `</div></div>`;
-          } else {
-             html += ` <p> Please <a href="/signup.html"> sign up </a> or <a href="/login.html"> Log in </a> </p>`;
-          }
-          html += `</body></html>`;
-          res.send(html);
-             html += `</div>`;
-          } else {
-             html += ` <p> Please <a href="/signup.html"> sign up </a> or <a href="/login.html"> Log in </a> </p>`;
-          }
-          html += `</body></html>`;
-          res.send(html);
+              </style>
+              </head>
+              <body>
+              <h1> Welcome to the Homepage</h1>
+              `;
+              if (user){
+                 html += `
+                 <h2> Hello, ${user.firstName} ${user.lastName}</h2>
+                  <div id="user-avatar">
+                 `;
+                 if (user.imageUrl){
+                    html += `<img src ="${user.imageUrl}" 
+                    alt="${user.firstName} ${user.lastName}">`; 
+                 } else {
+                    const initials = `${user.firstName.charAt(0).toUpperCase()}${user.lastName.charAt(0).toUpperCase()}`;
+                       html += `${initials}`;
+                 }
+                 html += `</div>`;
+              } else {
+                 html += ` <p> Please <a href="/signup.html"> sign up </a> or <a href="/login.html"> Log in </a> </p>`;
+              }
+              html += `</body></html>`;
+              res.send(html);
+            } catch (err) {
+               console.error('Homepage error:', err);
+               res.status(500).send('Server error');
+            }
           });
-
+ 
 
 
 
