@@ -31,9 +31,6 @@ app.use(session({
   }
 }));
 
-
-
-
 //Connect to MongoDB database "my app"
 mongoose.connect(MONGO_URI)
 .then(() => console.log('Connected to MongoDB'))
