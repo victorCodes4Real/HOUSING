@@ -11,17 +11,26 @@ import User from './public/uploads/models/Users.js';
 const app = express ();
 const __dirname = path.resolve();
 
-// Use session middleware
+// Use session middleware 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname)); //To serve home.html, login.html, etc.
-app.use (session({
-    secret: 'your_secret_key',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 3600000 } // 1 hour
+const session = require('express-session');
+const MongoStore = require('connect-mongo'); // npm i connect-mongo
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'mynameisachilonuvictorikennaiwasborninapril',
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create ({ mongoUrl: 'mongodb://localhost:27017/yourdb'}),
+  cookie: {
+     maxAge: 24 * 60 * 60 * 1000, // 24hours
+     httpOnly: true,
+     secure: process.env.NODE_ENV === 'production', // HTTPS only in prod
+     sameSite: 'lax'
+  }
 }));
+
 
 
 
